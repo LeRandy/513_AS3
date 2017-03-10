@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+		<link rel="stylesheet" type="text/css" href="http://localhost:3000/css/style.css">
+    <title>AS3 Chat</title>
+  </head>
+  <body>
+		<div>
+			<div id=div1>
+				<p> You are:</p><p id="username"></p>
+			</div>
+			<ul id="messages"></ul>
+			<div class="users">
+        <ul id="users"></ul>
+			</div>
+		</div>
+		<div content="form">
+			<form action="">
+	      <input id="m" autocomplete="off" /><button>Send</button>
+	    </form>
+    </div>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+		<script>
+			function updateScroll(){
+			    var element = document.getElementById("messages");
+			    element.scrollTop = element.scrollHeight;
+			}
+			$(function () {
+				var socket = io();
+				$('form').submit(function(){
+					socket.emit('chat message', $('#m').val());
+					$('#m').val('');
+					return false;
+				});
+				socket.on('chat message', function(msg){
+					$('#messages').append($('<li>').text(msg));
+					updateScroll();
+				});
+        socket.on('bold message', function(msg){
+          $('#messages').append($('<li>').text(msg));
+          $('#messages li:last-child').css("font-weight", "bold");
+          updateScroll();
+        });
+				socket.on('users update', function(msg){
+					document.getElementById('users').innerHTML = msg;
+				});
+        socket.on('name update', function(msg){
+          document.getElementById('username').innerHTML = msg;
+        });
+			});
+		</script>
+  </body>
+</html>
