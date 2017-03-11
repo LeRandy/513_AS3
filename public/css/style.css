@@ -6,15 +6,23 @@ html * {
 
 #div1 > p {
 	z-index: 1000;
-	color: white;
-	background: rgb(89, 175, 72);
+	font-family: fantasy;
+		color: white;
+	background: rgb(88, 173, 153);
 	padding: 10px;
 	margin: auto;
 	width: 20%;
 }
 
+#username {
+	font-style: italic;
+	text-decoration: underline;
+	color: red;
+	font-size: 200%;
+}
+
 body {
-	background: black;
+	background: rgb(144, 221, 205);
 	font-family: 13px Helvetica, Arial;
 }
 
@@ -31,7 +39,7 @@ input.hover {
 }
 
 form > input {
-	background: rgb(138, 142, 139);
+	background: white;
 	border: 0;
 	padding: 10px;
 	width: 89%;
@@ -41,7 +49,7 @@ form > input {
 button {
 	color: white;
 	width: 10%;
-	background: rgb(89, 175, 72);
+	background: rgb(56, 122, 106);
 	border: none;
 	padding: 10px;
 }
@@ -58,6 +66,7 @@ button:hover {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
+	font-size: 110%;
 	max-height: 100%;
 	width: 100%;
 	bottom: 50px;
@@ -65,15 +74,11 @@ button:hover {
 }
 
 #messages > li {
-	color: white;
+	font-family: arial;
+	color: rgb(79, 15, 30);
 	overflow: auto;
 	bottom: 0;
 	padding: 5px 10px;
-}
-
-#messages > li:nth-child(odd) {
-	z-index: -1;
-	background: rgb(68, 68, 68);
 }
 
 li.bold {
@@ -81,8 +86,10 @@ li.bold {
 }
 
 div.users {
-	background: green;
+	color: white;
+	background: rgb(188, 5, 36);
 	position: absolute;
+	font-family: sans-serif;
 	right: 0;
 	padding: 10px;
 	padding-right: 50px;

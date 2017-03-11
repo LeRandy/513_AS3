@@ -22,6 +22,8 @@
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 		<script>
+      // this function implements sticky scrollbar
+      // should be executed everytime the chat log updates
 			function updateScroll(){
 			    var element = document.getElementById("messages");
 			    element.scrollTop = element.scrollHeight;
@@ -33,20 +35,31 @@
 					$('#m').val('');
 					return false;
 				});
+        // let nickColorUse = false;
+        // let nickColor = '';
+        // Server receives a chat message
 				socket.on('chat message', function(msg){
 					$('#messages').append($('<li>').text(msg));
 					updateScroll();
+          // if (nickColorUse === true){
+          //   $('#messages li:last-child').css("font-weight", "bold");
+          // }
 				});
+        // Server is displaying your message in bold
         socket.on('bold message', function(msg){
           $('#messages').append($('<li>').text(msg));
           $('#messages li:last-child').css("font-weight", "bold");
           updateScroll();
         });
+        // User connects, disconnects, or changes their name
 				socket.on('users update', function(msg){
 					document.getElementById('users').innerHTML = msg;
 				});
         socket.on('name update', function(msg){
           document.getElementById('username').innerHTML = msg;
+        });
+        // client receives nickname color change command
+        socket.on('color change', function(msg){
         });
 			});
 		</script>
